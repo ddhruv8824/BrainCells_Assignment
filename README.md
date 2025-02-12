@@ -1,4 +1,5 @@
-##DEPLOY LINK - [https://frabjous-baklava-df11a7.netlify.app/]
+##DEPLOYED LINK - 
+[https://frabjous-baklava-df11a7.netlify.app/]https://frabjous-baklava-df11a7.netlify.app/
 ## API Endpoints
 
 ### 1. Fetch All Users
