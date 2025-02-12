@@ -9,6 +9,7 @@ const Users = () => {
   const [searchData, setSearchData] = useState("");
   const [filterData, setFilterData] = useState([]);
   const [loading, setLoading] = useState(false);
+
   async function fetchData() {
     setLoading(true);
     try {
@@ -36,33 +37,45 @@ const Users = () => {
     let filteredData = userData.filter((elem) =>
       elem.name.toLowerCase().includes(searchData.toLowerCase())
     );
+   
+    if(filteredData.length < 1){
+      setSearchData("")
+       alert("User not found")
+    }
+    setSearchData("")
     setFilterData(filteredData);
   }
+
   if (loading) {
-    return <h2> Loading</h2>;
-  } else {
-    return (
-      <div id="container">
-        <div id="content">
-          <h1 id="title">Users</h1>
-          <input
-            type="text"
-            onChange={handleChange}
-            placeholder="Search users..."
-          />
+    return <h2>Loading...</h2>;
+  }
+
+  return (
+    <div id="container">
+      <div id="content">
+        <h1 id="title">Users</h1>
+        <div id="btn">
+          <input type="text" value={searchData} onChange={handleChange} placeholder="Search users..." />
           <button onClick={handleSearch}>Search</button>
+        </div>
+        {filterData.length > 0 ? (
           <ul id="userlist">
             {filterData.map((elem) => (
-              <div key={elem.id} id="users">
-                <li>Name: {elem.name}</li>
-                <li>Email: {elem.email}</li>
-              </div>
+              <li key={elem.id}>
+                <p>Name: {elem.name}</p>
+                <p>Email: {elem.email}</p>
+              </li>
             ))}
           </ul>
-        </div>
+        ) : (
+          <div id="userlist">
+
+          <h1>User not found..!</h1>
+          </div>
+        )}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default Users;
